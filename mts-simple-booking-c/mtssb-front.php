@@ -1,4 +1,7 @@
 <?php
+// 2013-10-27 K.OHWADA
+// Fatal error: Cannot use string offset as an array
+
 if (!class_exists('MTSSB_Booking')) {
 	require_once(dirname(__FILE__) . '/mtssb-booking.php');
 }
@@ -396,6 +399,13 @@ class MTSSB_Front extends MTSSB_Booking {
 
 	<?php foreach ($this->articles as $article_id => &$article) :
 		$this->schedule[$article_id] = get_post_meta($article_id, $key_name, true);
+
+// 2013-10-27 K.OHWADA
+// Fatal error: Cannot use string offset as an array
+		if ( !isset( $this->schedule[$article_id] )) continue;
+		if ( !isset( $this->schedule[$article_id][date('d', $daytime)] )) continue;
+		if ( !isset( $this->schedule[$article_id][date('d', $daytime)]['open'] )) continue;
+				
 		// 予約クローズなら何も表示しない
 		if (!$this->schedule[$article_id][date('d', $daytime)]['open']) continue;
 	?><div class="day-calendar">
