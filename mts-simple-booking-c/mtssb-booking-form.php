@@ -1,4 +1,8 @@
 <?php
+// 2013-10-14 K.OHWADA
+// エラーメッセージが出るが、メールが送信され、予約も登録されている
+// メッセージを変更しただけの仮対策
+
 if (!class_exists('MTSSB_Booking')) {
 	require_once(dirname(__FILE__) . '/mtssb-booking.php');
 }
@@ -414,8 +418,13 @@ class MTSSB_Booking_Form extends MTSSB_Booking {
 			case 'ERROR_ADD_BOOKING':
 				return '予約のデータ登録を失敗しました。';
 			case 'ERROR_SEND_MAIL':
-				return 'メールの送信を失敗しました。電話で予約の確認をお願いします。';
 
+// 2013-10-14 K.OHWADA
+// エラーメッセージが出るが、メールが送信され、予約も登録されている
+// メッセージを変更しただけの仮対策
+//				return 'メールの送信を失敗しました。電話で予約の確認をお願いします。';
+				return '予約しました。';
+				
 			default :
 				return '入力エラーです。';
 		}
